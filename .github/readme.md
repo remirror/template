@@ -15,14 +15,14 @@
 
 <br />
 
-## Setup
+## Getting Started
 
-To setup this repo for your use:
+Use the following steps when first using this template.
 
 - Find and replace `remirror/template` with `user/repo` across the whole project.
-- Add your first package in the packages folder.
-
-To enable automated publishing add your npm token to to your repo secrets with the name `NPM_TOKEN`.
+- Replace `<< TEMPLATE NAME >>` in the `LICENSE` file with the name of your choosing.
+- Replace the template package in the packages folder with a package of your choosing.
+- **_OPTIONAL_**: For automatic publishing add your npm token to to your [github repo secrets](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) with the name `NPM_TOKEN`.
 
 <br />
 
