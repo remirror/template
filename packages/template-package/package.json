@@ -1,0 +1,31 @@
+{
+  "name": "template-package",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A sample package from `remirror/template`",
+  "keywords": [],
+  "homepage": "https://github.com/remirror/template/tree/HEAD/packages/template-package",
+  "repository": "https://github.com/remirror/template/tree/HEAD/packages/template-package",
+  "license": "MIT",
+  "contributors": [],
+  "sideEffects": false,
+  "main": "dist/template-package.cjs.js",
+  "module": "dist/template-package.esm.js",
+  "browser": {
+    "./dist/template-package.cjs.js": "./dist/template-package.browser.cjs.js",
+    "./dist/template-package.esm.js": "./dist/template-package.browser.esm.js"
+  },
+  "types": "dist/template-package.cjs.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@babel/runtime": "^7.11.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "meta": {
+    "sizeLimit": "5 KB"
+  }
+}

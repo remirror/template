@@ -1,0 +1,15 @@
+{
+  "name": "support",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The support directory for remirror/template monorepo",
+  "repository": "https://github.com/remirror/template/tree/HEAD/support",
+  "dependencies": {
+    "@changesets/pre": "^1.0.5",
+    "@changesets/read": "^0.4.6",
+    "@changesets/types": "^3.1.0",
+    "diffable-html": "^4.0.0",
+    "jest-axe": "^3.5.0",
+    "write-json-file": "^4.3.0"
+  }
+}
