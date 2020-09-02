@@ -22,7 +22,7 @@
 
 <p align="center">
   <a href="https://github.com/remirror/template/actions?query=workflow:ci">
-    <img src="https://github.com/remirror/template/workflows/ci/badge.svg?branch=next" alt="Continuous integration badge for github actions" title="CI Badge" />
+    <img src="https://github.com/remirror/template/workflows/ci/badge.svg?branch=main" alt="Continuous integration badge for github actions" title="CI Badge" />
   </a>
 </p>
 
