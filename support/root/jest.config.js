@@ -19,7 +19,6 @@ module.exports = {
   ],
   coverageReporters: ['json', 'lcov', 'text-summary', 'clover'],
   collectCoverage: true,
-  reporters: ['default', 'jest-github-reporter'],
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
   testRunner: 'jest-circus/runner',
   testPathIgnorePatterns: ['<rootDir>/support/', '/node_modules/'],
