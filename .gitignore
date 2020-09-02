@@ -157,4 +157,6 @@ cc-reporter
 /.huskyrc
 /.lintstagedrc
 /tsconfig.json
+/tsconfig.references.json
+/.markdownlint.json
 
