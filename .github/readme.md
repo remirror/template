@@ -14,8 +14,8 @@
   <a href="#getting-started"><strong>Getting Started</strong></a> ·
   <a href="#why"><strong>Why?</strong></a> ·
   <a href="#plans"><strong>Plans</strong></a> ·
-  <a href="./docs"><strong>Documentation</strong></a> ·
-  <a href="./docs/contributing.md"><strong>Contributing</strong></a>
+  <a href="../docs"><strong>Documentation</strong></a> ·
+  <a href="../docs/contributing.md"><strong>Contributing</strong></a>
 </p>
 
 <br />
@@ -73,7 +73,7 @@ Please read our [contribution guide] for details on our code of conduct, and the
 
 In addition each folder in this codebase a readme describing why it exists.
 
-You might also notice there are surprisingly few files in the root directory of this project. All the configuration files have been moved to the `support/root` directory and are symlinked to the root directory in a `preinstall` hook. For more information take a look at [folder](support/root) and [readme](support/root/readme.md).
+You might also notice there are surprisingly few files in the root directory of this project. All the configuration files have been moved to the `support/root` directory and are symlinked to the root directory in a `preinstall` hook. For more information take a look at [folder](../support/root) and [readme](../support/root/readme.md).
 
 <br />
 
@@ -87,5 +87,5 @@ This project uses [SemVer](http://semver.org/) for versioning. For the versions 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-[contribution guide]: docs/contributing
+[contribution guide]: ../docs/contributing
 [typescript]: https://github.com/microsoft/Typescript
