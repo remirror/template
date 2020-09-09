@@ -12,7 +12,7 @@
   ],
   "{packages,support}/**/*.{ts,tsx,js}": [
     "prettier --write",
-    "eslint --fix"
+    "FIX=true jest -c support/jest/jest-eslint.config.js"
   ],
   "packages/**/*.spec.{ts,tsx}": [
     "jest --coverage=false --bail --findRelatedTests"
