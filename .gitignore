@@ -159,4 +159,4 @@ cc-reporter
 /tsconfig.json
 /tsconfig.references.json
 /.markdownlint.json
-
+/jest-runner-eslint.config.js

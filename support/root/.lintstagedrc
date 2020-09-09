@@ -3,8 +3,12 @@
     "prettier --write",
     "eslint --fix"
   ],
-  "*.{json,yml,yaml,md,mdx}": [
+  "*.{json,yml,yaml}": [
     "prettier --write"
+  ],
+  "*.{md,mdx}": [
+    "prettier --write",
+    "eslint --fix"
   ],
   "{packages,support}/**/*.{ts,tsx,js}": [
     "prettier --write",

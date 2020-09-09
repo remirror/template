@@ -1,11 +1,5 @@
 const { join, relative } = require('path');
-const {
-  getAllDependencies,
-  formatFiles,
-  baseDir,
-  getRelativePathFromJson,
-  getTypedPackagesWithPath,
-} = require('./helpers');
+const { getAllDependencies, formatFiles, baseDir, getRelativePathFromJson } = require('./helpers');
 const writeJSON = require('write-json-file');
 const chalk = require('chalk');
 
@@ -126,10 +120,7 @@ async function generatePackageTsConfigs() {
 
   // Get the full package and the locations of all packages with a `types` field
   // in their `package.json`.
-  const [packages, dependencies] = await Promise.all([
-    getAllDependencies(),
-    getTypedPackagesWithPath(),
-  ]);
+  const packages = await getAllDependencies();
 
   /**
    * Write the file for an individual package.
@@ -139,27 +130,6 @@ async function generatePackageTsConfigs() {
    * @returns {Promise<void>}
    */
   async function writePackageTsconfig(pkg) {
-    /**
-     * Collect all the references need for the current package.
-     *
-     * @type {Array<{ path: string }>}
-     */
-    const references = [];
-
-    for (const dependency of Object.keys(pkg.dependencies ?? {})) {
-      // Check if the dependency is one of the internal workspace dependencies.
-      // We only want to add the internal project dependencies to the
-      // references.
-      if (!dependencies[dependency]) {
-        continue;
-      }
-
-      references.push({
-        // Add the dependency which is a path relative to the current package being checked.
-        path: join(relative(pkg.location, dependencies[dependency]), tsconfigFileName),
-      });
-    }
-
     // Don't add a tsconfig to packages within the support directory.
     if (relative(baseDir(), pkg.location).startsWith('support')) {
       return;
@@ -182,7 +152,6 @@ async function generatePackageTsConfigs() {
         ...basePackageTsconfig.compilerOptions,
         ...tsconfigCompilerOptions,
       },
-      // references,
     };
 
     // Write and prettify the files.
