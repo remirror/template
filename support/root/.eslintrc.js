@@ -59,14 +59,15 @@ let config = {
     'unicorn/no-null': 'off',
     'unicorn/no-reduce': 'off',
 
+    'jest/no-test-return-statement': 'off',
+    'jest/prefer-strict-equal': 'off',
+    'jest/no-export': 'off',
     'jest/consistent-test-it': ['error'],
     'jest/prefer-spy-on': ['warn'],
     'jest/prefer-todo': ['warn'],
     'jest/prefer-hooks-on-top': ['error'],
-    'jest/prefer-strict-equal': ['error'],
     'jest/no-large-snapshots': ['warn', { maxSize: 12 }],
     'jest/no-duplicate-hooks': ['error'],
-    'jest/no-test-return-statement': ['error'], // Use `async/await` instead.
     'jest/no-if': ['error'],
     'jest/no-restricted-matchers': [
       'error',
