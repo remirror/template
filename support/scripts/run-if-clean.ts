@@ -1,4 +1,12 @@
-const { execSync } = require('child_process');
+/**
+ * @script
+ *
+ * Only run the provided script if the git status is clean.
+ *
+ * `pnpm ts support/scripts/run-if-clean publish` -> `publish` only runs if the
+ * repository is in a clean state.
+ */
+import { execSync } from 'child_process';
 
 const [, , ...args] = process.argv;
 const command = args.join(' ');

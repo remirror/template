@@ -5,13 +5,19 @@
   "description": "The support directory for remirror/template monorepo",
   "repository": "https://github.com/remirror/template/tree/HEAD/support",
   "dependencies": {
+    "@babel/register": "^7.12.1",
     "@changesets/pre": "^1.0.5",
     "@changesets/read": "^0.4.6",
-    "@changesets/types": "^3.1.0",
+    "@changesets/types": "^3.2.0",
+    "@types/babel__core": "^7.1.12",
+    "@types/rimraf": "^3.0.0",
     "chalk": "^4.1.0",
     "cpy": "^8.1.1",
     "diffable-html": "^4.0.0",
-    "jest-axe": "^4.0.0",
+    "jest-axe": "^4.1.0",
+    "rimraf": "^3.0.2",
+    "tslog": "^2.11.1",
+    "type-fest": "^0.19.0",
     "write-json-file": "^4.3.0"
   }
 }

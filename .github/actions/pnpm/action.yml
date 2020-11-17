@@ -8,7 +8,7 @@ inputs:
   version: # id of input
     description: 'The version to use'
     required: false
-    default: 5.5.7
+    default: 5.12.0
 
 runs:
   using: 'composite'
@@ -19,10 +19,6 @@ runs:
 
     - name: setup pnpm config
       run: pnpm config set store-dir ${{ inputs.cache }}
-      shell: bash
-
-    - name: audit dependencies
-      run: pnpm audit --audit-level high
       shell: bash
 
     - name: install dependencies

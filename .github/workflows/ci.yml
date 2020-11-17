@@ -88,8 +88,17 @@ jobs:
         with:
           cache: ${{ env.PNPM_CACHE_FOLDER }}
 
-      - name: lint files
-        run: pnpm lint
+      - name: check TS / JS files
+        run: pnpm lint:es
+
+      - name: check markdown code blocks
+        run: pnpm lint:md
+
+      - name: check formatting
+        run: pnpm lint:prettier
+
+      - name: check repo and versions
+        run: pnpm lint:repo
 
   # Typecheck the project
   typecheck:
@@ -159,7 +168,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [13.x, 14.x, 15.x]
       fail-fast: false
 
     steps:
@@ -225,45 +234,3 @@ jobs:
 
       - name: check sizes
         run: pnpm size
-
-  # Publish the public packages if all tests pass
-  publish:
-    timeout-minutes: 20
-    needs: [lint, typecheck, unit_test, build_test, size_check]
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.repository == 'remirror/template'
-
-    steps:
-      - name: checkout code repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: setup caching
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.PNPM_CACHE_FOLDER }}
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-
-      - name: setup node.js
-        uses: actions/setup-node@v2-beta
-        with:
-          node-version: 14
-
-      - name: install and audit
-        uses: ./.github/actions/pnpm
-        with:
-          cache: ${{ env.PNPM_CACHE_FOLDER }}
-
-      - name: build project
-        run: pnpm build
-
-      - name: publish npm release
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > $HOME/.npmrc
-          pnpm release
-          rm $HOME/.npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

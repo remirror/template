@@ -1,10 +1,20 @@
-const fs = require('fs');
-const { resolve, join } = require('path');
+/**
+ * @script
+ *
+ * This is left as a JavaScript file since it is called in the `preinstall` hook
+ * before any packages have been installed. It only has access to the `node`
+ * internals.
+ */
 
-const targets = fs
-  .readdirSync(baseDir('support', 'root'))
+import { lstatSync, readdirSync, readlinkSync, rmdirSync, symlinkSync, unlinkSync } from 'fs';
+import { dirname, join, resolve } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const targets = readdirSync(baseDir('support', 'root'))
   // Exclude the `readme.md` file from being symlinked.
-  .filter((name) => !name.endsWith('readme.md'))
+  .filter((filename) => !filename.endsWith('readme.md'))
   .map((filename) => ({
     original: baseDir('support', 'root', filename),
     target: baseDir(filename),
@@ -26,7 +36,7 @@ function baseDir(...paths) {
  */
 function getFileStatSync(target) {
   try {
-    return fs.lstatSync(target);
+    return lstatSync(target);
   } catch {
     return;
   }
@@ -48,7 +58,7 @@ function deletePath(path) {
 
   if (stat.isFile()) {
     console.log('deleting file', path);
-    fs.unlinkSync(path);
+    unlinkSync(path);
   }
 
   if (!stat.isDirectory()) {
@@ -56,12 +66,12 @@ function deletePath(path) {
   }
 
   // Delete all nested paths
-  for (const file of fs.readdirSync(path)) {
+  for (const file of readdirSync(path)) {
     deletePath(join(path, file));
   }
 
   // Delete the directory
-  fs.rmdirSync(path);
+  rmdirSync(path);
 }
 
 /**
@@ -72,7 +82,7 @@ function deletePath(path) {
  */
 function isLinkedTo(path, target) {
   try {
-    const checkTarget = fs.readlinkSync(path);
+    const checkTarget = readlinkSync(path);
     return checkTarget === target;
   } catch {
     return false;
@@ -94,7 +104,7 @@ for (const { original, target } of targets) {
     deletePath(target);
   }
 
-  fs.symlinkSync(original, target);
+  symlinkSync(original, target);
 }
 
 console.log(

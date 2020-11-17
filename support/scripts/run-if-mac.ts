@@ -1,8 +1,15 @@
-const { execSync } = require('child_process');
-const { environment } = require('../jest/helpers');
-const { readProperty } = require('./helpers/read-config');
+/**
+ * @script
+ *
+ * Run the command if this is a mac.
+ */
 
-const shouldRunMacPostInstall = readProperty({ property: 'hooks.macPostInstall' });
+import { execSync } from 'child_process';
+
+import { environment } from '../jest/helpers';
+import { readProperty } from './helpers/read-config';
+
+const shouldRunMacPostInstall = readProperty('hooks.macPostInstall');
 
 const [, , ...args] = process.argv;
 const command = args.join(' ');

@@ -18,7 +18,7 @@ module.exports = {
 function readPackage(pkg) {
   const setDependency = createSetDependency(pkg);
 
-  setDependency('serialize-javascript', '^4.0.0');
+  setDependency('serialize-javascript', '^4.0.0 || ^5.0.0');
   return pkg;
 }
 

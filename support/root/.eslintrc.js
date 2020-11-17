@@ -77,8 +77,8 @@ let config = {
     'sort-imports': 'off',
 
     // Use nice import rules
-    'simple-import-sort/sort': [
-      'warn',
+    'simple-import-sort/imports': [
+      'error',
       {
         groups: [
           // Side effect imports.
@@ -101,6 +101,7 @@ let config = {
         ],
       },
     ],
+    'simple-import-sort/exports': 'error',
 
     '@typescript-eslint/no-unused-expressions': [
       'error',

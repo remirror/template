@@ -1,7 +1,8 @@
-const { getAllDependencies } = require('./helpers');
-const { promises: fs } = require('fs');
-const { join } = require('path');
-const { execSync } = require('child_process');
+import { execSync } from 'child_process';
+import { promises as fs } from 'fs';
+import path from 'path';
+
+import { getAllDependencies } from './helpers';
 
 const NAME = 'CHANGELOG.md';
 
@@ -10,7 +11,7 @@ const NAME = 'CHANGELOG.md';
  *
  * @param {string} filePath - the filePath
  */
-async function readFile(filePath) {
+async function readFile(filePath: string) {
   try {
     return await fs.readFile(filePath, 'utf-8');
   } catch {
@@ -21,9 +22,9 @@ async function readFile(filePath) {
 /**
  * Get the release date
  *
- * @param {Date} [date] - the date to use
+ * @param date - the date to use
  */
-function getDate(date = new Date()) {
+function getDate(date: Date = new Date()) {
   return `${date.getFullYear()}-${(date.getMonth() + 1)
     .toString()
     .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
@@ -32,9 +33,9 @@ function getDate(date = new Date()) {
 /**
  * Check if the file has changed.
  *
- * @param {string} filePath - the file path to check.
+ * @param filePath - the file path to check.
  */
-function hasFileChanged(filePath) {
+function hasFileChanged(filePath: string) {
   const isUntracked = !execSync(`git ls-files ${filePath}`).toString().trim();
 
   if (isUntracked) {
@@ -51,7 +52,7 @@ async function run() {
   const packages = await getAllDependencies(false);
 
   for (const pkg of packages) {
-    const filePath = join(pkg.location, NAME);
+    const filePath = path.join(pkg.location, NAME);
     const contents = await readFile(filePath);
 
     if (!contents) {

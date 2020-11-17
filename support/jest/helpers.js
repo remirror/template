@@ -1,7 +1,14 @@
-const { resolve, join } = require('path');
+const path = require('path');
 
-const baseDir = (...paths) => resolve(__dirname, '..', '..', join(...paths));
-const jestSupportDir = (...args) => baseDir(join('support', 'jest', ...args));
+/**
+ * @param {string[]} paths - the paths
+ */
+const baseDir = (...paths) => path.resolve(__dirname, '..', '..', path.join(...paths));
+
+/**
+ * @param {string[]} args - the paths
+ */
+const jestSupportDir = (...args) => baseDir(path.join('support', 'jest', ...args));
 
 const environment = {
   get isUnit() {

@@ -1,7 +1,21 @@
-const { join, relative } = require('path');
-const { getAllDependencies, formatFiles, baseDir, getRelativePathFromJson } = require('./helpers');
-const writeJSON = require('write-json-file');
-const chalk = require('chalk');
+/**
+ * @script
+ *
+ * Generate configuration files for `sizeLimit` and package `tsconfig`'s.
+ */
+
+import chalk from 'chalk';
+import path from 'path';
+import writeJSON from 'write-json-file';
+
+import {
+  baseDir,
+  formatFiles,
+  getAllDependencies,
+  getRelativePathFromJson,
+  getTypedPackagesWithPath,
+  Package,
+} from './helpers';
 
 // Get the args to see what needs to be generated.
 const [, , ...args] = process.argv;
@@ -18,7 +32,7 @@ const paths = {
 };
 
 // A list of all the generated files which will be prettified at the end of the process.
-const filesToPrettify = [];
+const filesToPrettify: string[] = [];
 
 /**
  * This generates the `.size-limit.json` file which is currently placed into the
@@ -33,20 +47,24 @@ async function generateSizeLimitConfig() {
   // Transform the packages into the correct sizes.
   const sizes = packages
     // Only pick the packages that are ESModules and have a size limit value in the `meta` package.json field.
-    .filter((pkg) => pkg.module && pkg.meta?.sizeLimit)
+    .filter((pkg): pkg is Package & { module: string } => !!(pkg.module && pkg.meta?.sizeLimit))
 
     // Convert the package.json into a valid array of [sizelimit
     // config](https://github.com/ai/size-limit/blob/HEAD/README.md#config)
-    .map((pkg) => ({
-      name: pkg.name,
-      path: join(
-        getRelativePathFromJson(pkg),
-        (pkg.browser && pkg.browser[`./${pkg.module}`]) || pkg.module,
-      ),
-      limit: pkg.meta.sizeLimit,
-      ignore: Object.keys(pkg.peerDependencies || {}),
-      running: false,
-    }));
+    .map((pkg) => {
+      const relativePath =
+        typeof pkg.browser === 'string'
+          ? pkg.browser
+          : pkg.browser?.[`./${pkg.module}`] || pkg.module;
+
+      return {
+        name: pkg.name,
+        path: path.join(getRelativePathFromJson(pkg), relativePath),
+        limit: pkg.meta?.sizeLimit,
+        ignore: Object.keys(pkg.peerDependencies ?? {}),
+        running: false,
+      };
+    });
 
   await writeJSON(paths.sizeLimit, sizes);
   filesToPrettify.push(paths.sizeLimit);
@@ -59,7 +77,7 @@ const baseMainTsconfig = {
   references: [
     { path: 'support/e2e/tsconfig.json' },
     { path: 'support/storybook/tsconfig.json' },
-    { path: 'support/examples/with-next/tsconfig.json' },
+    { path: 'examples/with-next/tsconfig.json' },
     { path: 'support/tsconfig.all.json' },
   ],
 };
@@ -93,7 +111,9 @@ async function generateMainTsConfig() {
     }
 
     // Add the reference to the main tsconfig object.
-    mainTsconfig.references.push({ path: join(getRelativePathFromJson(pkg), tsconfigFileName) });
+    mainTsconfig.references.push({
+      path: path.join(getRelativePathFromJson(pkg), tsconfigFileName),
+    });
   }
 
   // Write the main tsconfig reference file to the defined absolute path.
@@ -120,23 +140,41 @@ async function generatePackageTsConfigs() {
 
   // Get the full package and the locations of all packages with a `types` field
   // in their `package.json`.
-  const packages = await getAllDependencies();
+  const [packages, dependencies] = await Promise.all([
+    getAllDependencies(),
+    getTypedPackagesWithPath(),
+  ]);
 
   /**
    * Write the file for an individual package.
-   *
-   * @param {import('type-fest').PackageJson & { location: string }} - the
-   * package being checked
-   * @returns {Promise<void>}
    */
-  async function writePackageTsconfig(pkg) {
+  async function writePackageTsconfig(pkg: Package) {
+    /**
+     * Collect all the references need for the current package.
+     */
+    // const references: Array<{ path: string }> = [];
+
+    for (const dependency of Object.keys(pkg.dependencies ?? {})) {
+      // Check if the dependency is one of the internal workspace dependencies.
+      // We only want to add the internal project dependencies to the
+      // references.
+      if (!dependencies[dependency]) {
+        continue;
+      }
+
+      // references.push({
+      //   // Add the dependency which is a path relative to the current package being checked.
+      //   path: join(relative(pkg.location, dependencies[dependency]), tsconfigFileName),
+      // });
+    }
+
     // Don't add a tsconfig to packages within the support directory.
-    if (relative(baseDir(), pkg.location).startsWith('support')) {
+    if (path.relative(baseDir(), pkg.location).startsWith('support')) {
       return;
     }
 
     // The path for the tsconfig
-    const tsconfigFilePath = join(pkg.location, tsconfigFileName);
+    const tsconfigFilePath = path.join(pkg.location, tsconfigFileName);
 
     // The compiler options for the tsconfig file. If this is a typed package
     // then it is declared to be composite and if not it is left quite bare.
@@ -147,11 +185,12 @@ async function generatePackageTsConfigs() {
     // Create the json for the tsconfig which will be written to the tsconfig file.
     const tsconfig = {
       ...basePackageTsconfig,
-      extends: relative(pkg.location, baseDir(paths.mainTsconfig)),
+      extends: path.relative(pkg.location, baseDir(paths.mainTsconfig)),
       compilerOptions: {
         ...basePackageTsconfig.compilerOptions,
         ...tsconfigCompilerOptions,
       },
+      // references,
     };
 
     // Write and prettify the files.
@@ -182,7 +221,7 @@ async function main() {
     await Promise.all([generateSizeLimitConfig()]);
   }
 
-  if (!filesToPrettify.length > 0) {
+  if (filesToPrettify.length === 0) {
     return;
   }
 
