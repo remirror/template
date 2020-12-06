@@ -50,7 +50,6 @@ This template repo comes with the following tools:
 - `TypeScript`
 - `eslint`
 - `prettier`
-- `babel` configuration.
 - `vscode` integration with recommended plugins.
 - `codespaces` with a dev container which is ready to use. You can launch this codebase without any need for.
 - `changesets` for automating releases.

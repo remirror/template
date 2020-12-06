@@ -19,9 +19,6 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "@babel/runtime": "^7.12.5"
-  },
   "publishConfig": {
     "access": "public"
   },

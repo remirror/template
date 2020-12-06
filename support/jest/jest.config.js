@@ -13,15 +13,12 @@ module.exports = {
     __E2E__: false,
   },
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': [require.resolve('babel-jest'), { rootMode: 'upward' }],
+    '^.+\\.(js|jsx|ts|tsx)$': 'esbuild-jest',
   },
   moduleDirectories: ['node_modules'],
   testPathIgnorePatterns: ['<rootDir>/lib/', '<rootDir>/node_modules/'],
   testRegex: '/__tests__/.*\\.spec\\.tsx?$',
-  setupFilesAfterEnv: [
-    jestSupportDir('jest.framework.ts'),
-    jestSupportDir('jest.framework.dom.ts'),
-  ],
+  setupFilesAfterEnv: [jestSupportDir('jest.framework.ts')],
   cacheDirectory: baseDir('.jest', TEST_BUILD ? 'build' : 'aliased'),
   errorOnDeprecated: true,
 };

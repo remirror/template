@@ -226,7 +226,7 @@ async function main() {
   }
 
   // Format all the files which have been created before exiting.
-  await formatFiles(filesToPrettify.join(' '), true);
+  await formatFiles(filesToPrettify.join(' '), { silent: true, formatter: 'prettier' });
 }
 
 // Run the script and listen for any errors.
