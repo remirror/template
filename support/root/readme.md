@@ -46,7 +46,6 @@ pnpm checks:disable
   directory. It is possible
 - `.stylelintignore` - The files to ignore when linting the styles within the project.
 - `.stylelintrc.json` - The configuration for linting styles.
-- `babel.config.js` - The main babel config for the project.
 - `globals.d.ts` - The global types that should be available in the project.
 - `jest.config.js` - The jest configuration for running project wide testing.
 - `linaria.config.js` - The linaria (styles) configuration - which sets the naming convention for

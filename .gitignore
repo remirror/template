@@ -147,12 +147,10 @@ cc-reporter
 /.size-limit.json
 /.stylelintignore
 /.stylelintrc.json
-/babel.config.js
 /globals.d.ts
 /linaria.config.js
 /lingui.config.js
 /jest.config.js
-/.vscode
 /.prettierrc.js
 /.huskyrc
 /.lintstagedrc

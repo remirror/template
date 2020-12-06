@@ -5,7 +5,7 @@ describe('printTemplate', () => {
   spy.mockImplementation(() => {});
 
   it('returns a string', () => {
-    expect(printTemplate()).toStrictEqual(expect.any(String));
+    expect(printTemplate()).toStrictEqual(expect?.any(String));
     expect(spy).not.toHaveBeenCalled();
   });
 

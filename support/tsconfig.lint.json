@@ -9,8 +9,7 @@
     "../**/*.js",
     "../*.js",
     "../.eslintrc.js",
-    "../**/.eslintrc.js",
-    "../**/.babelrc.js"
+    "../**/.eslintrc.js"
   ],
   "exclude": ["../**/dist/", "../**/public/", "../**/.cache/", "../**/.linaria-cache/"]
 }

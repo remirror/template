@@ -57,7 +57,7 @@ let config = {
     'unicorn/prevent-abbreviations': 'off', // Too aggressive.
     'unicorn/filename-case': ['error', { case: 'kebabCase' }],
     'unicorn/no-null': 'off',
-    'unicorn/no-reduce': 'off',
+    'unicorn/import-style': 'off',
 
     'jest/no-test-return-statement': 'off',
     'jest/prefer-strict-equal': 'off',
@@ -309,6 +309,7 @@ if (process.env.FULL_ESLINT_CHECK) {
           '**/*.test.ts',
         ],
         // Switch off rules for test files.
+        // eslint-disable-next-line unicorn/no-reduce
         rules: Object.keys(rules).reduce(
           (accumulator, key) => ({ ...accumulator, [key]: 'off' }),
           {},

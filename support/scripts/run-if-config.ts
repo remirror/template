@@ -3,8 +3,6 @@
  *
  * Run the provided script based on the status of the property of the config
  * file. This used to decided whether husky hooks should be run.
- *
- * `babel-node support/scripts/run-if-config.ts hooks.preCommit lint`
  */
 
 import { execSync } from 'child_process';
