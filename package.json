@@ -7,7 +7,7 @@
     "audit": "pnpm audit --audit-level high",
     "build": "preconstruct build",
     "build:dev": "preconstruct dev",
-    "build:docs": "run-s docs:sidebar docs:prod docs:redirects",
+    "build:docs": "run-s docs:prod",
     "changeset": "changeset",
     "check:pnpm": "node support/scripts/check-pnpm.mjs",
     "checks": "run-s lint typecheck test",

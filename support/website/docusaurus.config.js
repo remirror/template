@@ -1,9 +1,9 @@
 module.exports = {
   title: 'Remirror Template',
   tagline: 'Welcome to your templated docs',
-  url: 'https://remirror.github.io',
-  baseUrl: '/template/',
-  onBrokenLinks: 'throw',
+  url: 'https://remirror.github.io/template',
+  baseUrl: '/',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'remirror', // Usually your GitHub org/user name.
