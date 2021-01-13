@@ -132,7 +132,7 @@ jobs:
         run: pnpm typecheck
 
   # Unit test and update coverage report
-  unit_test:
+  unit-test:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
@@ -163,7 +163,7 @@ jobs:
         run: pnpm test
 
   # Build the project and run tests on built files.
-  build_test:
+  build-test:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     strategy:
@@ -202,7 +202,7 @@ jobs:
         run: pnpm test:build
 
   # Check that package sizes are within their boundaries
-  size_check:
+  size-check:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:

@@ -8,7 +8,7 @@ env:
   PNPM_CACHE_FOLDER: .pnpm-store
 
 jobs:
-  deploy_docs:
+  github-pages:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.event.pull_request
