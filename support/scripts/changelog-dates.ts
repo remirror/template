@@ -49,7 +49,7 @@ function hasFileChanged(filePath: string) {
  * Add dates to all updated changelog files.
  */
 async function run() {
-  const packages = await getAllDependencies(false);
+  const packages = await getAllDependencies({ excludeDeprecated: false });
 
   for (const pkg of packages) {
     const filePath = path.join(pkg.location, NAME);

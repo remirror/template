@@ -5,23 +5,22 @@
   "editor.insertSpaces": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "eslint.enable": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.fixAll.markdownlint": true
   },
 
-  // File
+  // Files
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "files.exclude": {
     ".yarn/releases/**": true
   },
 
-  // Javascript
+  // JavasSript
   "javascript.format.enable": false,
 
-  // Typescript
+  // TypeScript
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
@@ -31,4 +30,9 @@
 
   // Node Project
   "deno.enable": false,
+
+  // Use PNPM
+  "npm.packageManager": "pnpm",
+  "eslint.packageManager": "pnpm",
+  "prettier.packageManager": "pnpm"
 }

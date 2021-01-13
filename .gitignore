@@ -152,7 +152,6 @@ cc-reporter
 /linaria.config.js
 /lingui.config.js
 /jest.config.js
-/.vscode
 /.prettierrc.js
 /.huskyrc
 /.lintstagedrc

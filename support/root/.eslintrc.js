@@ -10,9 +10,6 @@
  * - the imports plugin (requires a parser)
  */
 
-// The name of your scoped packages which is used for automatic imports.
-const PACKAGE_NAME_PATTERN = '@?remirror';
-
 /** @type {import('eslint').Linter.Config} */
 let config = {
   parser: '@typescript-eslint/parser',
@@ -33,7 +30,6 @@ let config = {
     'plugin:jest-formatting/recommended',
     'plugin:jest/recommended',
     'plugin:jest/style',
-    'plugin:unicorn/recommended',
     'plugin:eslint-comments/recommended',
   ],
 
@@ -50,14 +46,68 @@ let config = {
   rules: {
     'eslint-comments/no-unused-disable': 'error',
 
-    'unicorn/no-fn-reference-in-iterator': 'off',
-    'unicorn/no-object-as-default-parameter': 'off',
-    'unicorn/consistent-function-scoping': 'off',
-    'unicorn/no-nested-ternary': 'off',
-    'unicorn/prevent-abbreviations': 'off', // Too aggressive.
+    'unicorn/better-regex': 'error',
+    'unicorn/catch-error-name': 'error',
+    'unicorn/consistent-destructuring': 'error',
+    'unicorn/custom-error-definition': 'off',
+    'unicorn/empty-brace-spaces': 'error',
+    'unicorn/error-message': 'error',
+    'unicorn/escape-case': 'error',
+    'unicorn/expiring-todo-comments': 'error',
+    'unicorn/explicit-length-check': 'error',
     'unicorn/filename-case': ['error', { case: 'kebabCase' }],
-    'unicorn/no-null': 'off',
-    'unicorn/no-reduce': 'off',
+    'unicorn/import-style': 'error',
+    'unicorn/new-for-builtins': 'error',
+    'unicorn/no-abusive-eslint-disable': 'error',
+    'unicorn/no-array-reduce': 'error',
+    'unicorn/no-console-spaces': 'error',
+    'unicorn/no-for-loop': 'error',
+    'unicorn/no-hex-escape': 'error',
+    'unicorn/no-instanceof-array': 'error',
+    'unicorn/no-keyword-prefix': 'off',
+    'unicorn/no-lonely-if': 'error',
+    'no-nested-ternary': 'off',
+    'unicorn/no-nested-ternary': 'error',
+    'unicorn/no-new-array': 'error',
+    'unicorn/no-new-buffer': 'error',
+    'unicorn/no-process-exit': 'error',
+    'unicorn/no-unreadable-array-destructuring': 'error',
+    'unicorn/no-unsafe-regex': 'off',
+    'unicorn/no-unused-properties': 'off',
+    'unicorn/no-useless-undefined': 'error',
+    'unicorn/no-zero-fractions': 'error',
+    'unicorn/number-literal-case': 'error',
+    'unicorn/numeric-separators-style': 'error',
+    'unicorn/prefer-add-event-listener': 'error',
+    'unicorn/prefer-array-find': 'error',
+    'unicorn/prefer-array-flat-map': 'error',
+    'unicorn/prefer-array-index-of': 'error',
+    'unicorn/prefer-array-some': 'error',
+    'unicorn/prefer-date-now': 'error',
+    'unicorn/prefer-default-parameters': 'error',
+    'unicorn/prefer-dom-node-append': 'error',
+    'unicorn/prefer-dom-node-dataset': 'error',
+    'unicorn/prefer-dom-node-remove': 'error',
+    'unicorn/prefer-dom-node-text-content': 'error',
+    'unicorn/prefer-includes': 'error',
+    'unicorn/prefer-keyboard-event-key': 'error',
+    'unicorn/prefer-math-trunc': 'error',
+    'unicorn/prefer-modern-dom-apis': 'error',
+    'unicorn/prefer-negative-index': 'error',
+    'unicorn/prefer-number-properties': 'error',
+    'unicorn/prefer-optional-catch-binding': 'error',
+    'unicorn/prefer-query-selector': 'error',
+    'unicorn/prefer-reflect-apply': 'error',
+    'unicorn/prefer-regexp-test': 'error',
+    'unicorn/prefer-set-has': 'error',
+    'unicorn/prefer-spread': 'error',
+    'unicorn/prefer-string-slice': 'error',
+    'unicorn/prefer-string-starts-ends-with': 'error',
+    'unicorn/prefer-string-trim-start-end': 'error',
+    'unicorn/prefer-ternary': 'error',
+    'unicorn/prefer-type-error': 'error',
+    'unicorn/string-content': 'off',
+    'unicorn/throw-new-error': 'error',
 
     'jest/no-test-return-statement': 'off',
     'jest/prefer-strict-equal': 'off',
@@ -77,30 +127,7 @@ let config = {
     'sort-imports': 'off',
 
     // Use nice import rules
-    'simple-import-sort/imports': [
-      'error',
-      {
-        groups: [
-          // Side effect imports.
-          ['^\\u0000'],
-
-          // Packages that are not scoped to the scope of your monorepo. Things
-          // that start with a letter (or digit or underscore), or `@` followed
-          // by a letter.
-          [`^(?!${PACKAGE_NAME_PATTERN})@?\\w`],
-
-          // Scoped packages
-          [`^${PACKAGE_NAME_PATTERN}`],
-
-          // Absolute imports and other imports such as Vue-style `@/foo`.
-          // Anything that does not start with a dot.
-          ['^[^.]'],
-
-          // Relative imports. Anything that starts with a dot.
-          ['^\\.'],
-        ],
-      },
-    ],
+    'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
 
     '@typescript-eslint/no-unused-expressions': [
@@ -249,6 +276,11 @@ let config = {
         'unicorn/no-unreadable-array-destructuring': 'off',
       },
     },
+
+    {
+      files: ['**/*.d.ts', '**/__mocks__/**', 'docs/**', 'support/**'],
+      rules: { 'import/no-default-export': 'off' },
+    },
   ],
 };
 
@@ -273,14 +305,18 @@ if (process.env.FULL_ESLINT_CHECK) {
     ],
   };
 
+  const rulesOff = {};
+
+  for (const rule of Object.keys(rules)) {
+    rulesOff[rule] = 'off';
+  }
+
   config = {
     ...config,
-    plugins: [...config.plugins, 'import', 'sonarjs'],
-    extends: [...config.extends, 'plugin:import/typescript', 'plugin:sonarjs/recommended'],
+    plugins: [...config.plugins, 'import'],
+    extends: [...config.extends, 'plugin:import/typescript'],
     rules: {
       ...config.rules,
-      'sonarjs/no-same-line-conditional': 'off',
-      'sonarjs/cognitive-complexity': ['warn', 15],
       'import/no-deprecated': 'warn',
       'import/max-dependencies': ['warn', { max: 20 }],
       'import/no-default-export': 'warn',
@@ -308,11 +344,9 @@ if (process.env.FULL_ESLINT_CHECK) {
           '**/__dts__/**',
           '**/*.test.ts',
         ],
+
         // Switch off rules for test files.
-        rules: Object.keys(rules).reduce(
-          (accumulator, key) => ({ ...accumulator, [key]: 'off' }),
-          {},
-        ),
+        rules: rulesOff,
       },
       ...config.overrides,
     ],

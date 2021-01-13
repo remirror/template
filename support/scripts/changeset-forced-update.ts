@@ -1,3 +1,5 @@
+import { getDependentsGraph } from '@changesets/get-dependents-graph';
+import { getPackages } from '@manypkg/get-packages';
 import { promises as fs } from 'fs';
 import writeJson from 'write-json-file';
 
@@ -55,16 +57,23 @@ async function run() {
     return;
   }
 
-  const includedNames: Set<string> = new Set();
+  const nameList: string[] = [];
+  const graph = getDependentsGraph(await getPackages(baseDir()));
 
   for (const changeset of changesets) {
-    changeset.releases.forEach((release) => {
-      includedNames.add(release.name);
-    });
+    for (const release of changeset.releases) {
+      nameList.push(release.name);
+      const dependents = graph.get(release.name) ?? [];
+
+      // Add all the dependent packages to the included names since they will
+      // automatically be updated and don't need a forced update.
+      nameList.push(release.name, ...dependents);
+    }
   }
 
+  const nameSet = new Set(...nameList);
   const packages = (await getAllDependencies()).filter(
-    (pkg) => !pkg.private && !includedNames.has(pkg.name),
+    (pkg) => !pkg.private && !nameSet.has(pkg.name),
   );
 
   if (packages.length === 0) {

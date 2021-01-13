@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img width="300" height="300" src="../support/assets/logo.svg" alt="svg logo from undraw.co" title="SVG Logo from undraw.co" />
+    <img width="300" height="300" src="support/assets/logo.svg" alt="svg logo from undraw.co" title="SVG Logo from undraw.co" />
   </a>
 </p>
 
@@ -14,8 +14,8 @@
   <a href="#getting-started"><strong>Getting Started</strong></a> ·
   <a href="#why"><strong>Why?</strong></a> ·
   <a href="#plans"><strong>Plans</strong></a> ·
-  <a href="../docs"><strong>Documentation</strong></a> ·
-  <a href="../docs/contributing.md"><strong>Contributing</strong></a>
+  <a href="docs"><strong>Documentation</strong></a> ·
+  <a href="docs/contributing.md"><strong>Contributing</strong></a>
 </p>
 
 <br />
@@ -45,25 +45,25 @@ I've created this template primarily for my work with remirror, to prevent from 
 
 This template repo comes with the following tools:
 
-- `pnpm` monorepo.
-- `preconstruct` - Automated builds and great support for JS tooling.
-- `TypeScript`
-- `eslint`
-- `prettier`
-- `babel` configuration.
-- `vscode` integration with recommended plugins.
-- `codespaces` with a dev container which is ready to use. You can launch this codebase without any need for.
-- `changesets` for automating releases.
-- `GitHub Actions` as the primary CI tool.
-- `husky` for git hooks.
-- `lint-staged` for automated precommit checks.
+- [`pnpm`](https://pnpm.js.org/) monorepo.
+- [`preconstruct`](https://preconstruct.tools/) - Automated builds and great support for JS tooling.
+- [`TypeScript`](https://www.typescriptlang.org/) - For typesafe code, great editor support and simpler refactoring.
+- [`eslint`](https://eslint.org/) - for code linting.
+- [`prettier`](https://prettier.io/) - for code formatting.
+- [`babel`](https://babeljs.io/) - used by preconstruct for the compilation of code and macros.
+- [`vscode`](https://code.visualstudio.com/) - as the preferred editor integration with recommended plugins.
+- [`codespaces`](https://github.com/features/codespaces) - with a dev container which is ready to use. You can launch this codebase as it is or configure as needed for your project.
+- [`changesets`](https://github.com/atlassian/changesets) - for automating releases to GitHub and NPM.
+- [`GitHub Actions`](https://github.com/features/actions) - as the primary continuous integration (deployment) tool.
+- [`husky`](https://github.com/typicode/husky/tree/v4.3.7) - for git hooks.
+- [`lint-staged`](https://github.com/okonet/lint-staged) - for automated precommit checks.
 - Minimal files at the top level via symlinks to a directory in `support/root`.
 
 ## Plans
 
 These aren't currently supported but I might add them in the future.
 
-- [ ] Docusaurus website
+- [x] Documentation site located in `support/website` and
 
 <br />
 
@@ -73,7 +73,7 @@ Please read our [contribution guide] for details on our code of conduct, and the
 
 In addition each folder in this codebase a readme describing why it exists.
 
-You might also notice there are surprisingly few files in the root directory of this project. All the configuration files have been moved to the `support/root` directory and are symlinked to the root directory in a `preinstall` hook. For more information take a look at [folder](../support/root) and [readme](../support/root/readme.md).
+You might also notice there are surprisingly few files in the root directory of this project. All the configuration files have been moved to the `support/root` directory and are symlinked to the root directory in a `preinstall` hook. For more information take a look at [folder](support/root) and [readme](support/root/readme.md).
 
 <br />
 
@@ -87,5 +87,5 @@ This project uses [SemVer](http://semver.org/) for versioning. For the versions 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-[contribution guide]: ../docs/contributing
+[contribution guide]: docs/contributing
 [typescript]: https://github.com/microsoft/Typescript

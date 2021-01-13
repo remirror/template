@@ -1,3 +1,8 @@
+---
+hide_title: true
+title: Contributing
+---
+
 # Contributing
 
 - [Contributing](#contributing)

@@ -13,7 +13,7 @@ module.exports = {
   useTabs: false,
   overrides: [
     {
-      files: ['.github/**/*.md', '.changeset/**/*.md'],
+      files: ['.github/**/*.md', '.changeset/**/*.md', 'readme.md'],
       options: {
         proseWrap: 'never',
       },
