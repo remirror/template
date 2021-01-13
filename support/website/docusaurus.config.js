@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'My Site',
-  tagline: 'The tagline of my site',
+  title: 'Remirror Template',
+  tagline: 'Welcome to your templated docs',
   url: 'https://remirror.github.io',
   baseUrl: '/template/',
   onBrokenLinks: 'throw',
@@ -10,9 +10,9 @@ module.exports = {
   projectName: 'remirror', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'Docs',
+      title: 'Template',
       logo: {
-        alt: 'Remirror',
+        alt: 'Docs',
         src: 'img/logo.svg',
       },
       items: [
