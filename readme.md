@@ -13,7 +13,6 @@
 <p align="center">
   <a href="#getting-started"><strong>Getting Started</strong></a> ·
   <a href="#why"><strong>Why?</strong></a> ·
-  <a href="#plans"><strong>Plans</strong></a> ·
   <a href="docs"><strong>Documentation</strong></a> ·
   <a href="docs/contributing.md"><strong>Contributing</strong></a>
 </p>
@@ -58,12 +57,6 @@ This template repo comes with the following tools:
 - [`husky`](https://github.com/typicode/husky/tree/v4.3.7) - for git hooks.
 - [`lint-staged`](https://github.com/okonet/lint-staged) - for automated precommit checks.
 - Minimal files at the top level via symlinks to a directory in `support/root`.
-
-## Plans
-
-These aren't currently supported but I might add them in the future.
-
-- [x] Documentation site located in `website` and
 
 <br />
 
