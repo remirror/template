@@ -274,6 +274,7 @@ let config = {
         '@typescript-eslint/ban-ts-comment': 'off',
         'unicorn/no-process-exit': 'off',
         'unicorn/no-unreadable-array-destructuring': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
 

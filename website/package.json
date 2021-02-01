@@ -2,7 +2,7 @@
   "name": "website",
   "version": "0.0.0",
   "private": true,
-  "repository": "https://github.com/remirror/template/tree/HEAD/support/website",
+  "repository": "https://github.com/remirror/template/tree/HEAD/website",
   "scripts": {
     "build": "docusaurus build",
     "deploy": "docusaurus deploy",
@@ -35,5 +35,19 @@
     "classnames": "^2.2.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
+  },
+  "meta": {
+    "tsconfigs": {
+      "src": {
+        "compilerOptions": {
+          "allowJs": true
+        }
+      },
+      "./": {
+        "include": [
+          "src"
+        ]
+      }
+    }
   }
 }

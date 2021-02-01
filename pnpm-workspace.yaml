@@ -1,5 +1,4 @@
 packages:
-  - 'packages/@*/*'
   - 'packages/*'
   - 'support'
-  - 'support/website'
+  - 'website'

@@ -63,7 +63,7 @@ This template repo comes with the following tools:
 
 These aren't currently supported but I might add them in the future.
 
-- [x] Documentation site located in `support/website` and
+- [x] Documentation site located in `website` and
 
 <br />
 

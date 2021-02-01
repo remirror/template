@@ -1,9 +1,10 @@
 [
   {
     "name": "template-package",
-    "path": "packages/template-package/dist/template-package.browser.esm.js",
     "limit": "5 KB",
+    "path": "packages/template-package/dist/template-package.browser.esm.js",
     "ignore": [],
-    "running": false
+    "running": false,
+    "gzip": true
   }
 ]

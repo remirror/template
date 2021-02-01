@@ -12,7 +12,7 @@ import minimist from 'minimist';
 import path from 'path';
 import _rm from 'rimraf';
 import { Logger } from 'tslog';
-import { PackageJson } from 'type-fest';
+import { PackageJson, TsConfigJson } from 'type-fest';
 import { promisify } from 'util';
 
 /**
@@ -136,6 +136,26 @@ export interface PackageMeta {
    * The maximum size in KB for the package.
    */
   sizeLimit?: string;
+
+  /**
+   * Set the options for the tsconfig.
+   *
+   * False means no tsconfig files will be added to the package.
+   */
+  tsconfigs?: false | TsConfigMeta;
+
+  /**
+   * Whether to skip the api generation for a package.
+   */
+  skipApi?: boolean;
+}
+
+export interface TsConfigMeta {
+  [key: string]: TsConfigJson | false | undefined;
+  __dts__?: TsConfigJson | false;
+  __tests__?: TsConfigJson | false;
+  __e2e__?: TsConfigJson | false;
+  src?: TsConfigJson | false;
 }
 
 export interface Package extends Omit<PackageJson, 'name'> {

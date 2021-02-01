@@ -1,4 +1,4 @@
-import { printTemplate } from '..';
+import { printTemplate } from '../';
 
 describe('printTemplate', () => {
   const spy = jest.spyOn(console, 'log');

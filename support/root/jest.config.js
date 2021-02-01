@@ -16,6 +16,7 @@ module.exports = {
     '!**/__dts__/**',
     '!**/__fixtures__/**',
     '!support/**',
+    '!website/**',
   ],
   coverageReporters: ['json', 'lcov', 'text-summary', 'clover'],
   collectCoverage: true,

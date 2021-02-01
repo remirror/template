@@ -1,0 +1,4 @@
+{
+  "entryFiles": ["packages/template-package/src/index.ts"],
+  "out": "docs/api"
+}

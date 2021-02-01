@@ -1,0 +1,10 @@
+{
+  "extends": "../support/tsconfig.base.json",
+  "compilerOptions": {
+    "types": [],
+    "declaration": false,
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "include": ["./*/src"]
+}

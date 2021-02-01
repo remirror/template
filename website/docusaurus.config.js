@@ -72,14 +72,14 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          path: '../../docs',
+          path: '../docs',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/remirror/remirror/edit/HEAD/docs/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: 'https://github.com/remirror/remirror/edit/HEAD/support/website/blog/',
+          editUrl: 'https://github.com/remirror/remirror/edit/HEAD/website/blog/',
         },
       },
     ],
