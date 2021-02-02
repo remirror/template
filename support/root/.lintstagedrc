@@ -12,6 +12,6 @@
   ],
   "{packages,support}/**/*.{ts,tsx,js}": [
     "prettier --write",
-    "cross-env FULL_ESLINT_CHECK=true eslint --fix"
+    "eslint --fix"
   ]
 }
