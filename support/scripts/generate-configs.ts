@@ -6,7 +6,7 @@
 
 import { deepMerge, isPlainObject, isString, object, omitUndefined } from '@remirror/core-helpers';
 import chalk from 'chalk';
-import { readdir } from 'fs/promises';
+import { lstat,readdir } from 'fs/promises';
 import globby from 'globby';
 import os from 'os';
 import pLimit from 'p-limit';
@@ -609,7 +609,13 @@ async function generatePackageTsConfigs() {
 
   references.sort((a, b) => a.path.localeCompare(b.path));
   await writeJSON(paths.rootTsconfig, { include: [], files: [], references });
-  await writeJSON(paths.packagesTsconfig, packagesTsconfig);
+
+  const packagesStat = await lstat(path.dirname(paths.packagesTsconfig));
+
+  if (packagesStat.isDirectory()) {
+    await writeJSON(paths.packagesTsconfig, packagesTsconfig);
+  }
+
   await writeJSON(paths.rootTypedoc, { entryFiles, out: 'docs/api' });
   filesToPrettify.push(paths.rootTsconfig);
 }
