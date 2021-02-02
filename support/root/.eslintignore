@@ -4,6 +4,8 @@
 lib
 **/dist
 dist
+**/dist-types
+dist-types
 node_modules
 .out
 public
