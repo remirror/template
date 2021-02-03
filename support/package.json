@@ -5,7 +5,7 @@
   "description": "The support directory for remirror/template monorepo",
   "repository": "https://github.com/remirror/template/tree/HEAD/support",
   "dependencies": {
-    "@babel/register": "^7.12.10",
+    "@babel/register": "^7.12.13",
     "@changesets/get-dependents-graph": "^1.2.0",
     "@changesets/pre": "^1.0.5",
     "@changesets/read": "^0.4.6",
@@ -31,7 +31,7 @@
     "sort-keys": "^4.2.0",
     "source-map": "^0.7.3",
     "source-map-support": "^0.5.19",
-    "tslog": "^3.1.0",
+    "tslog": "^3.1.1",
     "type-fest": "^0.20.2",
     "write-json-file": "^4.3.0"
   },
