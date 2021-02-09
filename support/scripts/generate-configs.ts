@@ -6,7 +6,7 @@
 
 import { deepMerge, isPlainObject, isString, object, omitUndefined } from '@remirror/core-helpers';
 import chalk from 'chalk';
-import { lstat,readdir } from 'fs/promises';
+import { lstat, readdir } from 'fs/promises';
 import globby from 'globby';
 import os from 'os';
 import pLimit from 'p-limit';
